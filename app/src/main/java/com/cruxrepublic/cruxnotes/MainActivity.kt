@@ -1,6 +1,7 @@
 package com.cruxrepublic.cruxnotes
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
+    private val tag = this::class.simpleName
      var notePosition = POSITION_NOT_SET
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,13 +34,25 @@ class MainActivity : AppCompatActivity() {
         if (notePosition != POSITION_NOT_SET){
             displayNote()
         }else{
-            DataManager.notes.add(NoteInfo())
-            notePosition = DataManager.notes.lastIndex
+            createNewNote()
         }
+        Log.d(tag, "onCreate")
 
     }
 
+    private fun createNewNote() {
+        DataManager.notes.add(NoteInfo())
+        notePosition = DataManager.notes.lastIndex
+    }
+
     private fun displayNote() {
+        if (notePosition > DataManager.notes.lastIndex){
+            showMessage("Note not Found")
+            Log.e(tag, "Invalid note position $notePosition, max valid position ${DataManager.notes.lastIndex}")
+            return
+        }
+
+        Log.i(tag, "Displaying note for position $notePosition")
         val note = DataManager.notes[notePosition]
         textNoteTitle.setText(note.title)
         textNoteText.setText(note.text)
@@ -83,20 +97,21 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        if (notePosition >= DataManager.notes.lastIndex){
-            val menuItem = menu?.findItem(R.id.action_next)
-        if (menuItem != null) {
-            menuItem.icon = getDrawable(R.drawable.ic_block_white_24dp)
-            menuItem.isEnabled = false
-        }
-        }
-        return super.onPrepareOptionsMenu(menu)
-    }
+//    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+//        if (notePosition >= DataManager.notes.lastIndex){
+//            val menuItem = menu?.findItem(R.id.action_next)
+//        if (menuItem != null) {
+//            menuItem.icon = getDrawable(R.drawable.ic_block_white_24dp)
+//            menuItem.isEnabled = false
+//        }
+//        }
+//        return super.onPrepareOptionsMenu(menu)
+//    }
 
     override fun onPause() {
         super.onPause()
         saveNote()
+        Log.d(tag, "onPause")
     }
 
     private fun saveNote() {
