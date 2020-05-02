@@ -31,7 +31,7 @@ object DataManager {
         notes.add(note)
 
          note = NoteInfo(
-            CourseInfo("ndroid_async", "Android Async Programming and Services")
+            CourseInfo("android_async", "Android Async Programming and Services")
             ,"Android Async Programming and Services ", "This is how to program with async services" )
         notes.add(note)
 

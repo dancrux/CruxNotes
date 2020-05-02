@@ -97,16 +97,16 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-//    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-//        if (notePosition >= DataManager.notes.lastIndex){
-//            val menuItem = menu?.findItem(R.id.action_next)
-//        if (menuItem != null) {
-//            menuItem.icon = getDrawable(R.drawable.ic_block_white_24dp)
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if (notePosition >= DataManager.notes.lastIndex){
+            val menuItem = menu?.findItem(R.id.action_next)
+        if (menuItem != null) {
+            menuItem.icon = getDrawable(R.drawable.ic_block_white_24dp)
 //            menuItem.isEnabled = false
-//        }
-//        }
-//        return super.onPrepareOptionsMenu(menu)
-//    }
+        }
+        }
+        return super.onPrepareOptionsMenu(menu)
+    }
 
     override fun onPause() {
         super.onPause()
