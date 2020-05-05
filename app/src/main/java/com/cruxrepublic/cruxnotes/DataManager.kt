@@ -39,6 +39,31 @@ object DataManager {
             CourseInfo("java_lang", "Java Fundamentals: The Java Language")
             ,"Java Fundamentals: The Java Language ", "This is how to program" )
         notes.add(note)
+
+         note = NoteInfo(
+             CourseInfo("java_lang", "Java Fundamentals: The Java Language")
+             ,"Java Fundamentals: The Java Language ", "This is how to program" )
+         notes.add(note)
+
+         note = NoteInfo(
+             CourseInfo("java_lang", "Java Fundamentals: The Java Language")
+             ,"Java Fundamentals: The Java Language ", "This is how to program" )
+         notes.add(note)
+
+         note = NoteInfo(
+             CourseInfo("java_lang", "Java Fundamentals: The Java Language")
+             ,"Java Fundamentals: The Java Language ", "This is how to program" )
+         notes.add(note)
+
+         note = NoteInfo(
+             CourseInfo("java_lang", "Java Fundamentals: The Java Language")
+             ,"Java Fundamentals: The Java Language ", "This is how to program" )
+         notes.add(note)
+
+         note = NoteInfo(
+             CourseInfo("java_lang", "Java Fundamentals: The Java Language")
+             ,"Java Fundamentals: The Java Language ", "This is how to program" )
+         notes.add(note)
     }
 
     private fun initializeCourses(){

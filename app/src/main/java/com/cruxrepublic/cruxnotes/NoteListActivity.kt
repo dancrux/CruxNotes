@@ -2,8 +2,10 @@ package com.cruxrepublic.cruxnotes
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import kotlinx.android.synthetic.main.activity_note_list.*
 import kotlinx.android.synthetic.main.content_note_list.*
@@ -16,26 +18,20 @@ class NoteListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            val editNoteIntent = Intent(this, MainActivity::class.java)
+            val editNoteIntent = Intent(this, NoteActivity::class.java)
             startActivity(editNoteIntent)
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
         }
 
-        listNotes.adapter = ArrayAdapter(this,
-            android.R.layout.simple_list_item_1,
-            DataManager.notes)
+        listItems.layoutManager = LinearLayoutManager(this)
+        listItems.adapter = NoteRecyclerAdapter(this, DataManager.notes)
 
-        listNotes.setOnItemClickListener { parent, view, position, id ->
-            val editNoteIntent = Intent(this, MainActivity::class.java)
-            editNoteIntent.putExtra(NOTE_POSITION, position)
-            startActivity(editNoteIntent)
-        }
     }
 
     override fun onResume() {
         super.onResume()
-        (listNotes.adapter as ArrayAdapter<NoteInfo>).notifyDataSetChanged()
+        listItems.adapter!!.notifyDataSetChanged()
     }
 
 }
