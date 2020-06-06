@@ -18,9 +18,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
-    <string name="menu_home">Notes</string>
-    <string name="menu_gallery">Courses</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_notes">Notes</string>
+    <string name="menu_courses">Courses</string>
+    <string name="menu_recent_notes">Recent Notes</string>
 
     <string name="home_second">Home Second</string>
 </resources>

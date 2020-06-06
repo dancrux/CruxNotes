@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -33,6 +34,9 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     private val courseRecyclerAdapter by lazy {
         CourseRecyclerAdapter(this, DataManager.courses.values.toList())
     }
+    private val viewModel by lazy {
+        ViewModelProvider(this) [ItemsActivityViewModel::class.java]
+    }
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +52,7 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 //                .setAction("Action", null).show()
         }
 
-        displayNotes()
+        handleDisplaySelection(viewModel.navDrawerDisplaySelection)
 
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, 0, 0)
         drawer_layout.addDrawerListener(toggle)
@@ -61,11 +65,11 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 //        val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_notes, R.id.nav_courses, R.id.nav_slideshow
-            ), drawerLayout
-        )
+//        appBarConfiguration = AppBarConfiguration(
+//            setOf(
+//                R.id.nav_notes, R.id.nav_courses, R.id.nav_slideshow
+//            ), drawerLayout
+//        )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
 //        navView.setupWithNavController(navController)
     }
@@ -104,16 +108,33 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_notes -> {
-               displayNotes()
-            }
-            R.id.nav_courses -> {
-                displayCourses()
-            }
-        }
+       when(item.itemId){
+           R.id.nav_notes,
+           R.id.nav_courses,
+           R.id.nav_recent_notes -> {
+               handleDisplaySelection(item.itemId)
+               viewModel.navDrawerDisplaySelection = item.itemId
+           }
+       }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+    fun handleDisplaySelection(itemId: Int){
+        when(itemId){
+            R.id.nav_notes-> {
+                displayNotes()
+            }
+            R.id.nav_courses->{
+                displayCourses()
+            }
+            R.id.nav_recent_notes->{
+                displayRecentlyViewedNootes()
+            }
+        }
+    }
+
+    private fun displayRecentlyViewedNootes() {
+        TODO("Not yet implemented")
     }
 
     private fun handleSelection(message: String) {
