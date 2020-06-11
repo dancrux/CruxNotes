@@ -25,7 +25,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/textCourse"
                 app:layout_constraintStart_toStartOf="@+id/textCourse"
                 app:layout_constraintTop_toBottomOf="@id/textCourse"
-                app:srcCompat="@drawable/ic_event_note_black_24dp" />
+                app:srcCompat="@drawable/ic_menu_slideshow" />
 
             <TextView
                 android:id="@+id/textCourse"

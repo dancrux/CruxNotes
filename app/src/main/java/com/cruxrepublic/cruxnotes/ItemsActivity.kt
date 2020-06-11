@@ -65,11 +65,11 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 //        val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-//        appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.nav_notes, R.id.nav_courses, R.id.nav_slideshow
-//            ), drawerLayout
-//        )
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_notes, R.id.nav_courses, R.id.nav_recent_notes
+            ), drawerLayout
+        )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
 //        navView.setupWithNavController(navController)
     }
@@ -128,13 +128,16 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                 displayCourses()
             }
             R.id.nav_recent_notes->{
-                displayRecentlyViewedNootes()
+                displayRecentlyViewedNotes()
             }
         }
     }
 
-    private fun displayRecentlyViewedNootes() {
+    private fun displayRecentlyViewedNotes() {
         TODO("Not yet implemented")
+    }
+    fun onNoteSelected(note: NoteInfo){
+        viewModel.addToRecentlyViewedNotes(note)
     }
 
     private fun handleSelection(message: String) {
